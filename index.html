@@ -710,20 +710,6 @@
                 <img src="pakkat.jpg" alt="Proyek 1" onclick="openLightbox(this)">
                 <img src="desa-pakkat.jpg" alt="Proyek 1" onclick="openLightbox(this)">
                 
-                <!-- Slide 3: Video dengan Seekbar -->
-                <div class="video-slide">
-    <video src="Video PKM.mp4" muted loop playsinline></video>
-    
-    <!-- Tombol Play Tengah -->
-    <button class="vid-play-btn" onclick="toggleVideo(this)">
-        <i class="fas fa-play"></i>
-    </button>
-
-    <!-- Bar Durasi ala YouTube -->
-    <div class="video-controls">
-        <input type="range" class="vid-seekbar" value="0" step="0.1" min="0" max="100" oninput="seekVideo(this)">
-    </div>
-</div>
             </div>
             
             <button class="mc-btn mc-prev" onclick="mcSlide(this, -1)"><i class="fas fa-chevron-left"></i></button>
@@ -1117,6 +1103,20 @@ function toggleVideo(btn) {
         container.classList.remove('playing');
         icon.className = 'fas fa-play';
     }
+}
+
+
+/* ─── FUNGSI PLAY VIDEO YOUTUBE ─── */
+function playYoutube(container) {
+    container.innerHTML = `
+        <iframe 
+            src="https://www.youtube.com/embed/NR5icfe3bOc?autoplay=1" 
+            title="Video PKM" 
+            style="position:absolute; inset:0; width:100%; height:100%; border:none;"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    `;
 }
 
 /* ─── LIGHTBOX ─── */
