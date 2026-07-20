@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bram Modestus Naibaho — Portfolio</title>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+
+    /* ─── ORGANISASI CARD STYLE ─── */
+.org-card {
+    background: var(--bg-card);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px; /* Ukuran sedikit lebih lebar untuk foto */
+    overflow: hidden;
+    transition: 0.4s;
+    position: relative;
+}
+
+.org-card:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 223, 216, 0.1);
+}
+
+/* Bagian Foto Organisasi */
+.org-thumb {
+    width: 100%;
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.org-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+    filter: brightness(0.8); /* Agak gelap agar tema IT terasa */
+}
+
+.org-card:hover .org-thumb img {
+    filter: brightness(1);
+    transform: scale(1.05);
+}
+
+/* Badge Status (Aktif / Tahun) */
+.org-status-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 223, 216, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Konten Teks Organisasi */
+.org-content {
+    padding: 20px;
+}
+
+.org-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.org-role {
+    color: var(--accent-cyan);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.org-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    text-align: justify;
+}
+
+    /* ─── MODAL ZOOM STYLE ─── */
+.modal-zoom {
+    display: none; /* Tersembunyi secara default */
+    position: fixed;
+    z-index: 3000; /* Pastikan di atas segalanya */
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: zoom-out;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-zoom-content {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 0 50px rgba(0, 223, 216, 0.2);
+    transform: scale(0.8);
+    animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes zoomIn {
+    to { transform: scale(1); }
+}
+
+/* Tombol X (Keluar) */
+.close-zoom {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-zoom:hover {
+    color: var(--accent-cyan);
+    transform: scale(1.2);
+}
+
+#caption-zoom {
+    margin-top: 20px;
+    color: white;
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+    /* ─── CERTIFICATES SECTION ─── */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Kolom Sejajar */
+    gap: 30px;
+}
+
+.cert-card {
+    background: var(--bg-card); /* Warna navy gelap IT */
+    border-radius: 24px; /* Sudut melengkung halus */
+    border: 1px solid var(--card-border);
+    overflow: hidden;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Memastikan isi kartu di tengah */
+}
+
+.cert-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 15px 45px rgba(0, 223, 216, 0.15);
+}
+
+/* Bagian Gambar Sertifikat */
+.cert-thumb {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #000;
+}
+
+.cert-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Agar sertifikat tidak terpotong (terlihat utuh) */
+    padding: 10px; /* Memberi ruang di pinggir sertifikat */
+}
+
+/* Bagian Teks Sertifikat (Sesuai Gambar) */
+.cert-content {
+    padding: 25px;
+    text-align: center; /* TEKS KE TENGAH */
+    width: 100%;
+}
+
+.cert-content h3 {
+    font-family: 'DM Serif Display', serif; /* Font Serif sesuai gambar */
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.cert-content p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted); /* Warna abu-abu redup */
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Tombol Lihat PDF */
+.btn-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-pdf:hover {
+    background: var(--accent-cyan);
+    color: var(--bg-deep);
+    box-shadow: 0 0 20px var(--accent-cyan);
+}
+
+/* Responsive */
+@media (max-width: 1024px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .cert-grid { grid-template-columns: 1fr; } }
+
+    /* Bagian Konten Teks di dalam Kartu Proyek */
+.project-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Judul Proyek (H3) - Dibuat ke Tengah */
+.project-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    text-align: center; /* Membuat teks judul ke tengah */
+    width: 100%;
+}
+
+/* Deskripsi Proyek (P) - Dibuat Rata Kiri Kanan */
+.project-content p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    text-align: justify; /* Membuat teks rata kiri-kanan */
+    margin: 0;
+}
+
+/* Container Kontrol Video */
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 16;
+}
+
+.video-slide:hover .video-controls {
+    opacity: 1;
+}
+
+/* Style Bar Durasi (Seekbar) */
+.vid-seekbar {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    accent-color: #ff0000; /* Warna merah YouTube */
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    appearance: none;
+    outline: none;
+}
+
+.vid-seekbar::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #ff0000;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.video-slide:hover .vid-seekbar {
+    height: 6px;
+}
+
+        /* Container khusus slide video */
+.video-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Tombol Play Video */
+.vid-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(74, 156, 82, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.vid-play-btn:hover {
+    background: white;
+    color: var(--green-deep);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Sembunyikan tombol saat video diputar (opsional) */
+.video-slide.playing .vid-play-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+        /* Update bagian ini agar video juga mengikuti ukuran carousel */
+        .mini-carousel-track img, 
+        .mini-carousel-track video {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        :root {
+        --green-deep: #05070a;   /* Hitam kebiruan sangat gelap */
+        --green-dark: #0a0e14;   
+        --green-mid: #10161f;    /* Warna kartu */
+        --green-accent: #0070f3; /* Biru IT */
+        --green-light: #00dfd8;  /* Cyan terang */
+        --gold-pale: #f5f5f5;
+        --text-main: #eef2ee;
+        --text-muted: #8892b0;
+        --card-border: rgba(0, 223, 216, 0.1);
+        --card-hover: rgba(0, 223, 216, 0.3);
+
+        /* Alias agar konsisten dengan nama variabel yang dipakai di seluruh file */
+        --bg-deep: var(--green-deep);
+        --bg-card: var(--green-mid);
+        --accent-cyan: var(--green-light);
+    }
+
+        /* ─── RESET & BASE ─── */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family:'DM Sans',sans-serif;
+            background:var(--green-deep);
+            color:var(--text-main);
+            overflow-x:hidden;
+        }
+        body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: 
+            linear-gradient(var(--card-border) 1px, transparent 1px),
+            linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.5;
+    }
+        section { padding:120px 8%; position:relative; z-index:1; }
+
+        /* ─── NAVBAR ─── */
+        .navbar {
+            position:fixed; top:20px; left:50%; transform:translateX(-50%);
+            background:rgba(10,26,12,0.75); backdrop-filter:blur(28px);
+            padding:13px 36px; border-radius:50px;
+            display:flex; gap:36px; z-index:1000;
+            border:1px solid rgba(255,255,255,0.1);
+            box-shadow:0 4px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        .navbar a {
+            color:var(--text-muted); text-decoration:none;
+            font-size:13px; font-weight:500; letter-spacing:0.06em;
+            transition:color 0.25s; position:relative;
+        }
+        .navbar a::after {
+            content:''; position:absolute; bottom:-4px; left:0;
+            width:0; height:1px; background:white; transition:width 0.3s;
+        }
+        .navbar a:hover { color:white; }
+        .navbar a:hover::after { width:100%; }
+
+        /* ─── HERO ─── */
+        .hero {
+            height:100vh;
+            display:flex; justify-content:center; align-items:center;
+            flex-direction:column; text-align:center;
+            position:relative; overflow:hidden;
+        }
+        #hero-canvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+        .hero-content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
+
+        .hero-img-wrap { position:relative; display:inline-block; margin-bottom:32px; }
+        .hero-img-wrap img {
+            width:300px; height:300px; border-radius:50%; object-fit:cover;
+            border:2px solid rgba(255,255,255,0.3);
+            box-shadow:0 0 0 10px rgba(255,255,255,0.05), 0 0 80px rgba(74,156,82,0.2);
+            animation:float 5s ease-in-out infinite; display:block;
+        }
+        .hero-img-ring {
+            position:absolute; inset:-12px; border-radius:50%;
+            border:1px solid rgba(74,156,82,0.3);
+            animation:spin-ring 12s linear infinite;
+        }
+        @keyframes spin-ring { to{transform:rotate(360deg);} }
+        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);} }
+
+        .hero h1 {
+            font-family:'DM Serif Display',serif;
+            font-size:54px; font-weight:400; line-height:1.1; margin-bottom:6px;
+        }
+        .hero h1 span {
+            background:linear-gradient(90deg, #ffffff 0%, #a5d6a7 60%, #4a9c52 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+        }
+
+        /* ─── STACK GRID (5 KOLOM & IKON BESAR) ─── */
+        .stack-container {
+            margin-top: 40px;
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 kolom sejajar di desktop */
+            gap: 20px;
+        }
+
+        .stack-item {
+            background: var(--bg-card);
+            padding: 25px 15px;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .stack-item:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 223, 216, 0.2);
+            transform: translateY(-8px);
+            background: rgba(0, 223, 216, 0.05);
+        }
+
+        .stack-item i {
+            font-size: 45px; /* Ikon dibuat besar */
+            transition: 0.3s;
+        }
+
+        .stack-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .stack-item p {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Responsif: menyesuaikan jumlah kolom di layar kecil */
+        @media (max-width: 1024px) {
+            .stack-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .stack-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .stack-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ─── PROJECT GRID ─── */
+        /* Tata Letak 3 Kolom Sejajar */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: stretch;
+}
+
+.project-card {
+    background: var(--green-mid); /* Mengikuti variabel biru gelap */
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+/* Container Gambar */
+.project-thumb {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+}
+
+.mini-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+}
+
+.mini-carousel-track img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tombol Navigasi Panah */
+.mc-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+    opacity: 0; /* Sembunyi saat tidak di-hover */
+}
+
+.project-card:hover .mc-btn {
+    opacity: 1; /* Muncul saat kartu di-hover */
+}
+
+.mc-btn:hover {
+    background: var(--green-light);
+    border-color: white;
+}
+
+.mc-prev { left: 10px; }
+.mc-next { right: 10px; }
+
+/* Titik Indikator */
+.mc-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+}
+
+.mc-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.mc-dot.active {
+    background: white;
+    width: 15px;
+    border-radius: 4px;
+}
+
+/* Responsif untuk Tablet & HP */
+@media (max-width: 1024px) {
+    .project-grid { grid-template-columns: repeat(2, 1fr); } /* 2 kolom di tablet */
+}
+@media (max-width: 768px) {
+    .project-grid { grid-template-columns: 1fr; } /* 1 kolom di HP */
+}
+
+        /* ─── TIMELINE ORGANISASI ─── */
+        .org-timeline { position:relative; max-width:900px; margin:0 auto; }
+        .org-timeline::before {
+            content:''; position:absolute; left:50%; top:0; bottom:0; width:1px;
+            background:rgba(74,156,82,0.4); transform:translateX(-50%);
+        }
+        .org-item { display:flex; justify-content:flex-end; padding-right:calc(50% + 40px); margin-bottom:40px; position:relative; opacity:0; transition:0.6s; }
+        .org-item:nth-child(even) { justify-content:flex-start; padding-right:0; padding-left:calc(50% + 40px); }
+        .org-item.show { opacity:1; transform:translateX(0); }
+
+        /* ─── UTILS ─── */
+        .section-label { color:var(--green-light); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:10px; display:block; }
+        .section-title { font-family:'DM Serif Display',serif; font-size:44px; margin-bottom:30px; }
+        .section-divider { height:1px; background:linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); margin:0 8%; }
+
+        /* Lightbox */
+        .lightbox {
+            display:none; position:fixed; inset:0; z-index:2000;
+            background:rgba(0,0,0,0.95); backdrop-filter:blur(10px);
+            justify-content:center; align-items:center;
+        }
+        .lightbox.open { display:flex; }
+        .lb-img-wrap img { max-width:90vw; max-height:80vh; border-radius:10px; }
+
+        /* Responsive */
+        @media (max-width:768px) {
+            .org-timeline::before { left:20px; }
+            .org-item { justify-content:flex-start !important; padding-left:50px !important; padding-right:0 !important; }
+            .navbar { width:90%; gap:15px; padding:10px 20px; }
+            .hero h1 { font-size:36px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="#home">Home</a>
+    <a href="#projects">Project</a>
+    <a href="#stack">Stack</a>
+    <a href="#organisasi">Organisasi</a>
+    <a href="#certificates">Sertifikat</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+        <div class="hero-img-wrap">
+            <img src="foto-ku.jpeg" alt="Bram Naibaho">
+            <div class="hero-img-ring"></div>
+        </div>
+        <h1>Halo, Saya <br><span>Bram Modestus Naibaho</span></h1>
+        <div id="typing" style="height: 20px; color: var(--text-muted); margin-top:10px; letter-spacing: 2px;"></div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="section-label">Karya Pilihan</div>
+    <h2 class="section-title">End-to-End <span>Product Work</span></h2>
+    
+    <div class="project-grid">
+        
+        <!-- PROYEK 1 -->
+        <div class="project-card">
+    <div class="project-thumb">
+        <div class="mini-carousel" data-index="0">
+            <div class="mini-carousel-track">
+                <img src="pakkat.jpg" alt="Proyek 1" onclick="openLightbox(this)">
+                <img src="desa-pakkat.jpg" alt="Proyek 1" onclick="openLightbox(this)">
+                
+                <!-- Slide 3: Video dengan Seekbar -->
+                <div class="video-slide">
+    <video src="Video PKM.mp4" muted loop playsinline></video>
+    
+    <!-- Tombol Play Tengah -->
+    <button class="vid-play-btn" onclick="toggleVideo(this)">
+        <i class="fas fa-play"></i>
+    </button>
+
+    <!-- Bar Durasi ala YouTube -->
+    <div class="video-controls">
+        <input type="range" class="vid-seekbar" value="0" step="0.1" min="0" max="100" oninput="seekVideo(this)">
+    </div>
+</div>
+            </div>
+            
+            <button class="mc-btn mc-prev" onclick="mcSlide(this, -1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="mc-btn mc-next" onclick="mcSlide(this, 1)"><i class="fas fa-chevron-right"></i></button>
+            <div class="mc-dots"></div>
+        </div>
+    </div>
+    <div class="project-content">
+        <h3>Sistem Informasi Desa Manalu</h3>
+        <p>Sistem ini di bangun bertujuan menampilkan informasi Desa manalu Kecamatan Pakat Kabupaten Humbang Hasundutan, Sumatera Utara. Fitur fitur yang terdapat pada sistem informasi ini yaitu info desa, Potensi Desa, Penguman Desa, Berita dan layanan Desa. Sistem ini di harapkan dapat membantu masyarakat untuk mengetahui informasi-informasi di Desa Manalu. Sistem ini merupakan Pengabdian Kepada Masyarakat.</p>
+    </div>
+</div>
+
+        <!-- PROYEK 2 -->
+        <div class="project-card">
+            <div class="project-thumb">
+                <div class="mini-carousel" data-index="0">
+                    <div class="mini-carousel-track">
+                        <img src="foto-1.jpeg" alt="Proyek 2">
+                        <img src="foto-2.jpeg" alt="Proyek 2">
+                        <img src="pa-1.png" alt="Proyek 2">
+                    </div>
+                    <button class="mc-btn mc-prev" onclick="mcSlide(this, -1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="mc-btn mc-next" onclick="mcSlide(this, 1)"><i class="fas fa-chevron-right"></i></button>
+                    <div class="mc-dots"></div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Proyek Akhir 1</h3>
+                <p>Tujuan dari pengembangan website Informasi Restaurant Pizza Etnik Toba adalah untuk memberikan kemudahan kepada pelanggan dalam memperoleh informasi mengenai berbagai menu yang tersedia di Restaurant Pizza Etnik Toba. Selain itu, website ini juga bertujuan untuk memperluas jangkauan pasar dengan menyediakan sistem pemesanan digital yang dapat diakses secara online oleh pelanggan kapan saja dan di mana saja.
+</p>
+            </div>
+        </div>
+
+        <!-- PROYEK 3 -->
+        <div class="project-card">
+            <div class="project-thumb">
+                <div class="mini-carousel" data-index="0">
+                    <div class="mini-carousel-track">
+                        <img src="pa-2 foto1.jpeg" alt="Proyek 3">
+                        <img src="pa-2 foto2.jpeg" alt="Proyek 3">
+                        <img src="pa-2 foto3.jpeg" alt="Proyek 3">
+                    </div>
+                    <button class="mc-btn mc-prev" onclick="mcSlide(this, -1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="mc-btn mc-next" onclick="mcSlide(this, 1)"><i class="fas fa-chevron-right"></i></button>
+                    <div class="mc-dots"></div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Proyek Akhir 2</h3>
+                <p>Tujuan dari pengembangan Sistem Monitoring Kualitas Air Danau Berbasis LoRa Buoy ini adalah untuk mempermudah pemantauan kondisi kualitas air danau secara otomatis dan real-time melalui pengukuran parameter seperti pH, suhu, dan kekeruhan. Selain itu, sistem ini bertujuan untuk mendukung pengiriman data jarak jauh menggunakan teknologi LoRa sehingga tetap dapat beroperasi di wilayah dengan keterbatasan jaringan seluler.
+</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">Technology <span>Stack</span></h2>
+    
+    <div class="stack-container">
+        <div class="stack-grid">
+            <!-- Item-item ini akan otomatis tersusun 5 per baris -->
+            <div class="stack-item"><i class="fab fa-html5" style="color:#e34c26"></i><p>HTML</p></div>
+            <div class="stack-item"><i class="fab fa-css3-alt" style="color:#264de4"></i><p>CSS</p></div>
+            <div class="stack-item"><i class="fab fa-js" style="color:#f7df1e"></i><p>JS</p></div>
+            <div class="stack-item"><i class="fab fa-react" style="color:#61dafb"></i><p>React</p></div>
+            <div class="stack-item"><i class="fab fa-node" style="color:#3c873a"></i><p>Node</p></div>
+            
+            <div class="stack-item"><i class="fab fa-laravel" style="color:#ff2d20"></i><p>Laravel</p></div>
+            <div class="stack-item"><i class="fab fa-python" style="color:#3572A5"></i><p>Python</p></div>
+            <div class="stack-item"><i class="fab fa-java" style="color:#f89820"></i><p>Java</p></div>
+            <div class="stack-item"><i class="fas fa-database" style="color:#00758f"></i><p>MySQL</p></div>
+            <div class="stack-item"><i class="fab fa-php" style="color:#8892be"></i><p>PHP</p></div>
+            
+            <div class="stack-item"><i class="fab fa-docker" style="color:#0db7ed"></i><p>Docker</p></div>
+            <div class="stack-item"><i class="fab fa-git-alt" style="color:#f1502f"></i><p>Git</p></div>
+            <div class="stack-item"><i class="fab fa-github" style="color:#ccc"></i><p>GitHub</p></div>
+            <div class="stack-item"><i class="fab fa-linux" style="color:#fcc624"></i><p>Linux</p></div>
+            <div class="stack-item"><i class="fab fa-ubuntu" style="color:#e95420"></i><p>Ubuntu</p></div>
+            
+            <div class="stack-item"><i class="fas fa-shield-alt" style="color:#557c94"></i><p>Kali</p></div>
+            <div class="stack-item"><i class="fas fa-server" style="color:#10b981"></i><p>Server</p></div>
+            <div class="stack-item"><i class="fas fa-desktop" style="color:#607d8b"></i><p>VMware</p></div>
+            <div class="stack-item"><i class="fas fa-cloud" style="color:#4285f4"></i><p>Cloud</p></div>
+            <div class="stack-item"><i class="fas fa-lock" style="color:#9c27b0"></i><p>Sec</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ORGANISASI & KEPANITIAAN -->
+<section id="organisasi">
+    <div class="section-label">EXPERIENCE</div>
+    <h2 class="section-title">Organisasi & <span>Kepanitiaan</span></h2>
+    
+    <div class="org-timeline">
+
+        <!-- ITEM 1 (KIRI) -->
+<div class="org-item">
+    <div class="org-card">
+        <div class="org-thumb">
+            <!-- TAMBAHKAN ONCLICK DI SINI -->
+            <img src="Depsen.jpeg" alt="DEPSENDUB" onclick="openCertModal(this)" style="cursor: zoom-in;">
+        </div>
+        <div class="org-content">
+            <h3>Departemen Seni dan Budaya IT Del</h3>
+            <p class="org-desc">Bertanggung jawab dalam mengembangkan, melestarikan, dan mempromosikan seni serta budaya di lingkungan IT Del melalui penyelenggaraan berbagai kegiatan, pertunjukan, dan program kreatif yang mendukung pengembangan bakat mahasiswa.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ITEM 2 (KANAN) -->
+<div class="org-item">
+    <div class="org-card">
+        <div class="org-thumb">
+            <!-- TAMBAHKAN ONCLICK DI SINI -->
+            <img src="Himatekjpeg.jpeg" alt="HIMATEK IT Del" onclick="openCertModal(this)" style="cursor: zoom-in;">
+        </div>
+        <div class="org-content">
+            <h3>Himpunan Mahasiswa Teknologi Komputer IT Del</h3>
+            <span class="org-role">Anggota Aktif Himpunan</span>
+            <p class="org-desc">Berpartisipasi aktif dalam program kerja himpunan mahasiswa Teknologi Komputer, terutama dalam bidang pengembangan skill teknis anggota.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+    <div class="section-label">Achievements</div>
+    <h2 class="section-title">Licenses & <span>Certifications</span></h2>
+    
+    <div class="cert-grid">
+        <!-- SERTIFIKAT 1 -->
+        <div class="cert-card">
+            <div class="cert-thumb">
+                <!-- Ganti dengan gambar screenshot sertifikat Anda -->
+        <img src="satu.jpeg" alt="Gemastik Certificate" onclick="openCertModal(this)" style="cursor: zoom-in;">
+            </div>
+            <div class="cert-content">
+                <h3>Gemastik Sertifikat</h3>
+                <p>Pusat Layanan Pembiayaan Pendidikan Kemendikbud Ristek</p>
+            </div>
+        </div>
+
+        <!-- SERTIFIKAT 2 -->
+        <div class="cert-card">
+            <div class="cert-thumb">
+        <img src="dua.png" alt="Huawei Certificate" onclick="openCertModal(this)" style="cursor: zoom-in;">
+            </div>
+            <div class="cert-content">
+                <h3>HCIA-Storage V5.0</h3>
+                <p>Huawei ICT Academy-Egypt</p>
+            </div>
+        </div>
+
+        <!-- SERTIFIKAT 3 -->
+        <div class="cert-card">
+            <div class="cert-thumb">
+        <img src="tiga.png" alt="Huawei Certificate" onclick="openCertModal(this)" style="cursor: zoom-in;">
+            </div>
+            <div class="cert-content">
+                <h3>HCIA-Datacom V1.0</h3>
+                <p>Huawei ICT Academy-Egypt</p>
+            </div>
+        </div>
+
+        <!-- SERTIFIKAT 4 -->
+        <div class="cert-card">
+            <div class="cert-thumb">
+                <img src="empat.png" alt="Sertifikat Cyber Security">
+            </div>
+            <div class="cert-content">
+                <h3>Data Analytics Essentials</h3>
+                <p>Cisco Networking Academy</p>
+                <a href="empat.pdf" target="_blank" class="btn-pdf">
+                    <i class="fas fa-file-pdf"></i> Lihat PDF
+                </a>
+            </div>
+        </div>
+
+        <!-- SERTIFIKAT 5 -->
+        <div class="cert-card">
+            <div class="cert-thumb">
+                <img src="lima.png" alt="Sertifikat Cyber Security">
+            </div>
+            <div class="cert-content">
+                <h3>Ethical Hacker</h3>
+                <p>Cisco Networking Academy</p>
+                <a href="lima.pdf" target="_blank" class="btn-pdf">
+                    <i class="fas fa-file-pdf"></i> Lihat PDF
+                </a>
+            </div>
+        </div>
+
+        <!-- SERTIFIKAT 6 -->
+        <div class="cert-card">
+            <div class="cert-thumb">
+                <img src="enam.png" alt="Sertifikat Cyber Security">
+            </div>
+            <div class="cert-content">
+                <h3>Introduction to Cyber Security</h3>
+                <p>Cisco Networking Academy</p>
+                <a href="enam.pdf" target="_blank" class="btn-pdf">
+                    <i class="fas fa-file-pdf"></i> Lihat PDF
+                </a>
+            </div>
+        </div>
+
+        <!-- SERTIFIKAT 1 -->
+        <div class="cert-card">
+            <div class="cert-thumb">
+                <!-- Ganti dengan gambar screenshot sertifikat Anda -->
+        <img src="Web Design Competition.jpeg" alt="Web Design Certificate" onclick="openCertModal(this)" style="cursor: zoom-in;">
+            </div>
+            <div class="cert-content">
+                <h3>Web Design Competition</h3>
+                <p>PK-TECHSOFT / HIMA-RPL</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <div class="lb-img-wrap">
+        <img id="lb-img" src="">
+        <button onclick="closeLightbox()" style="position:absolute; top:-40px; right:0; color:white; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+    </div>
+</div>
+
+<footer style="text-align:center; padding:50px; color:var(--text-muted); font-size:12px;">
+    &copy; Bram Modestus Naibaho
+</footer>
+
+<script>
+/* ─── CANVAS BACKGROUND ─── */
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.addEventListener('resize', resize); resize();
+const particles = Array.from({length: 50}, () => ({
+    x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 0.5, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5
+}));
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(0, 223, 216, 0.3)'; // UBAH KE WARNA INI
+    particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+    });
+    requestAnimationFrame(draw);
+}
+draw();
+
+/* ─── TYPING EFFECT ─── */
+const words = ["Web Developer", "Network Enthusiast", "Backend Engineer"];
+let wordIdx = 0, charIdx = 0, isDeleting = false;
+function type() {
+    const current = words[wordIdx];
+    const display = isDeleting ? current.substring(0, charIdx--) : current.substring(0, charIdx++);
+    document.getElementById('typing').textContent = display;
+    if (!isDeleting && charIdx > current.length) { isDeleting = true; setTimeout(type, 2000); }
+    else if (isDeleting && charIdx < 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; setTimeout(type, 500); }
+    else { setTimeout(type, isDeleting ? 50 : 100); }
+}
+type();
+
+/* ─── CAROUSEL PROJECT (SUPPORT VIDEO SLIDE) ─── */
+document.addEventListener('DOMContentLoaded', () => {
+    const carousels = document.querySelectorAll('.mini-carousel');
+    carousels.forEach(carousel => {
+        const track = carousel.querySelector('.mini-carousel-track');
+        // PERBAIKAN: Menghitung img DAN video-slide
+        const slides = track.querySelectorAll('img, .video-slide'); 
+        const dotsContainer = carousel.querySelector('.mc-dots');
+        
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('mc-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => mcGoTo(carousel, i));
+            dotsContainer.appendChild(dot);
+        });
+        carousel.dataset.index = 0;
+    });
+});
+
+/* Jalankan fungsi update durasi saat halaman dimuat */
+document.addEventListener('DOMContentLoaded', () => {
+    const allVideos = document.querySelectorAll('.video-slide video');
+    
+    allVideos.forEach(video => {
+        const seekbar = video.parentElement.querySelector('.vid-seekbar');
+
+        // Update bar saat video diputar
+        video.addEventListener('timeupdate', () => {
+            if (video.duration) {
+                const value = (video.currentTime / video.duration) * 100;
+                seekbar.value = value;
+                
+                // Efek warna progress merah
+                seekbar.style.background = `linear-gradient(to right, #ff0000 ${value}%, rgba(255,255,255,0.3) ${value}%)`;
+            }
+        });
+    });
+});
+
+/* ─── FUNGSI ZOOM SERTIFIKAT ─── */
+function openCertModal(imgElement) {
+    const modal = document.getElementById("certModal");
+    const fullImg = document.getElementById("imgFull");
+    const captionText = document.getElementById("caption-zoom");
+
+    modal.style.display = "flex";
+    fullImg.src = imgElement.src;
+    captionText.innerHTML = imgElement.alt; // Mengambil teks dari atribut 'alt' gambar
+    document.body.style.overflow = "hidden"; // Kunci scroll saat zoom aktif
+}
+
+function closeCertModal() {
+    const modal = document.getElementById("certModal");
+    modal.style.display = "none";
+    document.body.style.overflow = ""; // Aktifkan kembali scroll
+}
+
+// Menutup dengan tombol Escape pada keyboard
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") closeCertModal();
+});
+
+/* Fungsi untuk Menarik Durasi (Seek) */
+function seekVideo(input) {
+    const video = input.closest('.video-slide').querySelector('video');
+    const time = (input.value / 100) * video.duration;
+    video.currentTime = time;
+}
+
+function mcSlide(btn, direction) {
+    const carousel = btn.closest('.mini-carousel');
+    const track = carousel.querySelector('.mini-carousel-track');
+    const slides = track.querySelectorAll('img, .video-slide'); 
+    let currentIndex = parseInt(carousel.dataset.index || 0);
+
+    currentIndex += direction;
+    if (currentIndex >= slides.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = slides.length - 1;
+
+    mcGoTo(carousel, currentIndex);
+}
+
+function mcGoTo(carousel, index) {
+    const track = carousel.querySelector('.mini-carousel-track');
+    const dots = carousel.querySelectorAll('.mc-dot');
+    
+    track.style.transform = `translateX(-${index * 100}%)`;
+    carousel.dataset.index = index;
+
+    dots.forEach(dot => dot.classList.remove('active'));
+    if (dots[index]) dots[index].classList.add('active');
+    
+    // Opsional: Pause video jika user pindah slide
+    const allVideos = carousel.querySelectorAll('video');
+    allVideos.forEach(v => {
+        v.pause();
+        v.parentElement.classList.remove('playing');
+        const btnIcon = v.parentElement.querySelector('.vid-play-btn i');
+        if(btnIcon) btnIcon.className = 'fas fa-play';
+    });
+}
+
+/* ─── FUNGSI PLAY/PAUSE VIDEO ─── */
+function toggleVideo(btn) {
+    const container = btn.parentElement;
+    const video = container.querySelector('video');
+    const icon = btn.querySelector('i');
+
+    if (video.paused) {
+        video.play();
+        container.classList.add('playing');
+        icon.className = 'fas fa-pause';
+    } else {
+        video.pause();
+        container.classList.remove('playing');
+        icon.className = 'fas fa-play';
+    }
+}
+
+/* ─── LIGHTBOX ─── */
+function openLightbox(img) {
+    const lbImg = document.getElementById('lb-img');
+    const lb = document.getElementById('lightbox');
+    if(lbImg && lb) {
+        lbImg.src = img.src;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+}   
+function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    if(lb) {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+}
+
+/* ─── SCROLL REVEAL ─── */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('show');
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.project-card, .org-item').forEach(el => observer.observe(el));
+</script>
+
+<!-- MODAL ZOOM SERTIFIKAT -->
+<div id="certModal" class="modal-zoom" onclick="closeCertModal()">
+    <span class="close-zoom">&times;</span>
+    <img class="modal-zoom-content" id="imgFull">
+    <div id="caption-zoom"></div>
+</div>
+
+</body>
+</html>
