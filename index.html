@@ -833,6 +833,29 @@
             </div>
         </div>
         
+                <!-- PROYEK 5 -->
+        <div class="project-card">
+            <div class="project-thumb">
+                <div class="mini-carousel" data-index="0">
+                    <div class="mini-carousel-track">
+                        <img src="openstack-1.png" alt="OpenStack Horizon" onclick="openLightbox(this)">
+                        <img src="openstack-2.png" alt="Website di instance OpenStack" onclick="openLightbox(this)">
+                        <img src="openstack-3.png" alt="OpenStack service list" onclick="openLightbox(this)">
+                    </div>
+                    <button class="mc-btn mc-prev" onclick="mcSlide(this, -1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="mc-btn mc-next" onclick="mcSlide(this, 1)"><i class="fas fa-chevron-right"></i></button>
+                    <div class="mc-dots"></div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Instalasi &amp; Deployment OpenStack dengan DevStack</h3>
+                <p>Memasang OpenStack 2026.1 secara all-in-one menggunakan DevStack pada VM Ubuntu Server 24.04 di VMware Workstation, lalu men-deploy website pada instance dengan floating IP dan cloud-init. Selama pengerjaan saya mengatasi disk penuh (perluasan LVM) dan jaringan eksternal yang mati setelah reboot (br-ex, NAT). Seluruh langkah, konfigurasi, dan screenshot didokumentasikan di GitHub.</p>
+                <a href="https://github.com/Bram-02/openstack-devstack-tugas" target="_blank" class="btn-pdf" style="align-self:center; margin-top:20px;">
+                    <i class="fab fa-github"></i> Lihat di GitHub
+                </a>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -868,6 +891,7 @@
             <div class="stack-item"><i class="fas fa-server" style="color:#10b981"></i><p>Server</p></div>
             <div class="stack-item"><i class="fas fa-desktop" style="color:#607d8b"></i><p>VMware</p></div>
             <div class="stack-item"><i class="fas fa-cloud" style="color:#4285f4"></i><p>Cloud</p></div>
+            <div class="stack-item"><i class="fab fa-openstack" style="color:#ed1944"></i><p>OpenStack</p></div>   <!-- baris baru -->
             <div class="stack-item"><i class="fas fa-lock" style="color:#9c27b0"></i><p>Sec</p></div>
 <div class="stack-item"><i class="fas fa-code" style="color:#00599C"></i><p>C++</p></div>
         </div>
@@ -1099,8 +1123,7 @@ function draw() {
 }
 draw();
 
-
-const words = ["Web Developer", "Network Enthusiast", "Backend Engineer"];
+const words = ["Web Developer", "Network Enthusiast", "Cloud Enthusiast", "Backend Engineer"];
 let wordIdx = 0, charIdx = 0, isDeleting = false;
 function type() {
     const current = words[wordIdx];
