@@ -837,10 +837,12 @@
         <div class="project-card">
             <div class="project-thumb">
                 <div class="mini-carousel" data-index="0">
-                    <div class="mini-carousel-track">
+                                        <div class="mini-carousel-track">
                         <img src="openstack-1.png" alt="OpenStack Horizon" onclick="openLightbox(this)">
                         <img src="openstack-2.png" alt="Website di instance OpenStack" onclick="openLightbox(this)">
                         <img src="openstack-3.png" alt="OpenStack service list" onclick="openLightbox(this)">
+                        <img src="openstack-4.png" alt="Dashboard monitoring Grafana (Node Exporter)" onclick="openLightbox(this)">
+                        <img src="openstack-5.png" alt="Aplikasi berjalan di Kubernetes (k3s): 2 pod Running" onclick="openLightbox(this)">
                     </div>
                     <button class="mc-btn mc-prev" onclick="mcSlide(this, -1)"><i class="fas fa-chevron-left"></i></button>
                     <button class="mc-btn mc-next" onclick="mcSlide(this, 1)"><i class="fas fa-chevron-right"></i></button>
@@ -848,11 +850,16 @@
                 </div>
             </div>
             <div class="project-content">
-                <h3>Instalasi &amp; Deployment OpenStack dengan DevStack</h3>
-                <p>Memasang OpenStack 2026.1 secara all-in-one menggunakan DevStack pada VM Ubuntu Server 24.04 di VMware Workstation, lalu men-deploy website pada instance dengan floating IP dan cloud-init. Selama pengerjaan saya mengatasi disk penuh (perluasan LVM) dan jaringan eksternal yang mati setelah reboot (br-ex, NAT). Seluruh langkah, konfigurasi, dan screenshot didokumentasikan di GitHub.</p>
-                <a href="https://github.com/Bram-02/openstack-devstack-tugas" target="_blank" class="btn-pdf" style="align-self:center; margin-top:20px;">
-                    <i class="fab fa-github"></i> Lihat di GitHub
-                </a>
+                <h3>Lab Praktik DevOps &amp; Cloud (OpenStack, Docker, Kubernetes, IaC)</h3>
+                <p>Proyek belajar mandiri untuk membangun kemampuan DevOps dan cloud. Dimulai dengan memasang OpenStack 2026.1 all-in-one (DevStack) pada VM Ubuntu Server 24.04 di VMware Workstation, lalu men-deploy website pada instance dengan floating IP dan cloud-init, termasuk mengatasi disk penuh (perluasan LVM) dan jaringan yang mati setelah reboot. Dilanjutkan dengan otomatisasi menggunakan Bash dan systemd, container Docker dan Docker Compose, pipeline CI GitHub Actions, Infrastructure as Code dengan OpenTofu dan Ansible, aplikasi di Kubernetes (k3s), monitoring Prometheus dan Grafana, serta pemindaian keamanan dengan Gitleaks dan Trivy (celah HIGH/CRITICAL turun dari 66 menjadi 0). Seluruh langkah, konfigurasi, dan screenshot didokumentasikan di GitHub.</p>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+                    <a href="https://github.com/Bram-02/latihan-devops" target="_blank" class="btn-pdf">
+                        <i class="fab fa-github"></i> Lab DevOps di GitHub
+                    </a>
+                    <a href="https://github.com/Bram-02/openstack-devstack-tugas" target="_blank" class="btn-pdf">
+                        <i class="fab fa-github"></i> Tugas OpenStack
+                    </a>
+                </div>
             </div>
         </div>
 
