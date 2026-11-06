@@ -1122,10 +1122,10 @@
 </section>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close-zoom" onclick="closeLightbox()">&times;</span>
     <div class="lb-img-wrap">
         <img id="lb-img" src="">
-        <button onclick="closeLightbox()" style="position:absolute; top:-40px; right:0; color:white; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
     </div>
 </div>
 
@@ -1328,6 +1328,17 @@ const observer = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.1 });
 document.querySelectorAll('.project-card, .org-item').forEach(el => observer.observe(el));
+
+// Semua gambar proyek bisa diperbesar
+document.querySelectorAll('.mini-carousel-track img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => openLightbox(img));
+});
+
+// Tombol Esc menutup gambar yang diperbesar
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
 </script>
 
 
