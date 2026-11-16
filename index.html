@@ -880,9 +880,32 @@
             </div>
             <div class="project-content">
                 <h3>Pipeline CI/CD DevSecOps ke Kubernetes</h3>
-                <p>Setiap git push melewati 3 gerbang keamanan (Gitleaks, Trivy, uji halaman), lalu image dikirim ke GHCR dan di-deploy ke Kubernetes dengan Ansible, lengkap dengan rollback satu perintah dan monitoring Prometheus + Grafana. Teknologi: GitHub Actions, Trivy, Docker, Ansible, Kubernetes, Grafana, OpenTofu.</p>
-                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+                <p>Pipeline DevSecOps end-to-end: CI dengan gerbang keamanan (Gitleaks, Trivy, uji halaman), deploy idempoten ke Kubernetes dengan Ansible, autoscaling 2–5 pod, HTTPS otomatis, dan keamanan berlapis (Pod Security Admission restricted, NetworkPolicy default deny). Teknologi: GitHub Actions, Trivy, Docker, Helm, Ansible, Kubernetes, cert-manager, Grafana.</p>                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
                     <a href="https://github.com/Bram-02/devops-website-bram" target="_blank" class="btn-pdf">
+                        <i class="fab fa-github"></i> Lihat di GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+
+                <!-- PROYEK 7 -->
+        <div class="project-card">
+            <div class="project-thumb">
+                <div class="mini-carousel" data-index="0">
+                    <div class="mini-carousel-track">
+                        <img src="gitops-argocd-1.png" alt="Argo CD: pola app of apps" onclick="openLightbox(this)">
+                        <img src="gitops-argocd-2.png" alt="Argo CD: objek website dari Helm chart" onclick="openLightbox(this)">
+                    </div>
+                    <button class="mc-btn mc-prev" onclick="mcSlide(this, -1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="mc-btn mc-next" onclick="mcSlide(this, 1)"><i class="fas fa-chevron-right"></i></button>
+                    <div class="mc-dots"></div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Kubernetes IaC &amp; GitOps Lab</h3>
+                <p>Cluster Kubernetes multi-node (kind) beserta platformnya dibangun sepenuhnya dengan OpenTofu dan bisa dibangun ulang identik dalam kurang dari 4 menit. Deployment memakai GitOps dengan Argo CD dan pola app of apps: aplikasi dan lingkungan baru hanya lewat commit Git, perubahan manual dikembalikan otomatis. Teknologi: OpenTofu, Kubernetes, Argo CD, Traefik.</p>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+                    <a href="https://github.com/Bram-02/latihan-devops" target="_blank" class="btn-pdf">
                         <i class="fab fa-github"></i> Lihat di GitHub
                     </a>
                 </div>
@@ -926,6 +949,8 @@
             <!-- Container & Orkestrasi -->
             <div class="stack-item"><i class="fab fa-docker" style="color:#0db7ed"></i><p>Docker</p></div>
             <div class="stack-item"><i class="devicon-kubernetes-plain" style="color:#326ce5"></i><p>Kubernetes</p></div>
+            <div class="stack-item"><i class="fas fa-ship" style="color:#4f7cff"></i><p>Helm</p></div>
+            <div class="stack-item"><i class="fas fa-code-branch" style="color:#ef7b4d"></i><p>Argo CD</p></div>
 
             <!-- Cloud & IaC -->
             <div class="stack-item"><i class="fas fa-cubes" style="color:#ed1944"></i><p>OpenStack</p></div>
@@ -948,6 +973,7 @@
             <div class="stack-item"><i class="fas fa-shield-alt" style="color:#557c94"></i><p>Kali</p></div>
             <div class="stack-item"><i class="fas fa-bug" style="color:#1904da"></i><p>Trivy</p></div>
             <div class="stack-item"><i class="fas fa-lock" style="color:#9c27b0"></i><p>Security</p></div>
+            
         </div>
     </div>
 </section>
