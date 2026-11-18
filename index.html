@@ -858,11 +858,11 @@
                 <h3>Lab Praktik DevOps &amp; Cloud (OpenStack, Docker, Kubernetes, IaC)</h3>
                 <p>Proyek belajar mandiri untuk membangun kemampuan DevOps dan cloud. Dimulai dengan memasang OpenStack 2026.1 all-in-one (DevStack) pada VM Ubuntu Server 24.04 di VMware Workstation, lalu men-deploy website pada instance dengan floating IP dan cloud-init, termasuk mengatasi disk penuh (perluasan LVM) dan jaringan yang mati setelah reboot. Dilanjutkan dengan otomatisasi menggunakan Bash dan systemd, container Docker dan Docker Compose, pipeline CI GitHub Actions, Infrastructure as Code dengan OpenTofu dan Ansible, aplikasi di Kubernetes (k3s), monitoring Prometheus dan Grafana, serta pemindaian keamanan dengan Gitleaks dan Trivy (celah HIGH/CRITICAL turun dari 66 menjadi 0). Seluruh langkah, konfigurasi, dan screenshot didokumentasikan di GitHub.</p>
                 <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
-                    <a href="https://github.com/Bram-02/latihan-devops" target="_blank" class="btn-pdf">
+                    <a href="https://github.com/Bram-02/kubernetes-iac-gitops-lab" target="_blank" class="btn-pdf">
                         <i class="fab fa-github"></i> Lab DevOps di GitHub
                     </a>
-                    <a href="https://github.com/Bram-02/openstack-devstack-tugas" target="_blank" class="btn-pdf">
-                        <i class="fab fa-github"></i> Tugas OpenStack
+                    <a href="https://github.com/Bram-02/openstack-private-cloud" target="_blank" class="btn-pdf">
+                        <i class="fab fa-github"></i> Private Cloud OpenStack
                     </a>
                 </div>
             </div>
@@ -903,9 +903,9 @@
             </div>
             <div class="project-content">
                 <h3>Kubernetes IaC &amp; GitOps Lab</h3>
-                <p>Cluster Kubernetes multi-node (kind) beserta platformnya dibangun sepenuhnya dengan OpenTofu dan bisa dibangun ulang identik dalam kurang dari 4 menit. Deployment memakai GitOps dengan Argo CD dan pola app of apps: aplikasi dan lingkungan baru hanya lewat commit Git, perubahan manual dikembalikan otomatis. Teknologi: OpenTofu, Kubernetes, Argo CD, Traefik.</p>
+                <p>Cluster Kubernetes multi-node (kind) beserta platformnya dibangun sepenuhnya dengan OpenTofu dan bisa dibangun ulang identik dalam kurang dari 4 menit. Deployment memakai GitOps dengan Argo CD dan pola app of apps: lingkungan dev dan prod dari overlay Kustomize, versi baru dipromosikan lewat pull request dengan tag image yang sama (tanpa build ulang), CI membuka PR rilis ke dev secara otomatis, rollback dengan git revert, dan perubahan manual dikembalikan otomatis. Deployment dibatasi AppProject dan CODEOWNERS. Teknologi: OpenTofu, Kubernetes, Argo CD, Kustomize, GitHub Actions.</p>
                 <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
-                    <a href="https://github.com/Bram-02/latihan-devops" target="_blank" class="btn-pdf">
+                    <a href="https://github.com/Bram-02/kubernetes-iac-gitops-lab" target="_blank" class="btn-pdf">
                         <i class="fab fa-github"></i> Lihat di GitHub
                     </a>
                 </div>
