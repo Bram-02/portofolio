@@ -880,7 +880,7 @@
             </div>
             <div class="project-content">
                 <h3>Pipeline CI/CD DevSecOps ke Kubernetes</h3>
-                <p>Pipeline DevSecOps end-to-end: CI dengan gerbang keamanan (Gitleaks, Trivy, uji halaman), deploy idempoten ke Kubernetes dengan Ansible, autoscaling 2–5 pod, HTTPS otomatis, dan keamanan berlapis (Pod Security Admission restricted, NetworkPolicy default deny). Teknologi: GitHub Actions, Trivy, Docker, Helm, Ansible, Kubernetes, cert-manager, Grafana.</p>                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+                <p>Pipeline DevSecOps end-to-end: CI dengan gerbang keamanan (Gitleaks, Trivy, uji halaman) serta gerbang terpisah untuk Helm chart, konfigurasi monitoring, dan playbook Ansible. Image ditandatangani cosign (keyless, identitas GitHub Actions) dan diverifikasi sebelum deploy, sehingga image tanpa tanda tangan ditolak. Deploy idempoten ke Kubernetes dengan Ansible memakai akun RBAC berhak minimum, autoscaling 2–5 pod, dan HTTPS otomatis yang diperiksa setiap deploy; keamanan berlapis dengan Pod Security Admission restricted dan NetworkPolicy default deny. Alert Prometheus dikirim ke Telegram sesuai tingkat keparahan, dengan aturan yang diuji otomatis; semua versi dikunci dan diperbarui lewat PR mingguan Dependabot. Teknologi: GitHub Actions, Trivy, cosign, Dependabot, Docker, Helm, Ansible, Kubernetes, cert-manager, Prometheus, Alertmanager, Grafana.</p>                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
                     <a href="https://github.com/Bram-02/devops-website-bram" target="_blank" class="btn-pdf">
                         <i class="fab fa-github"></i> Lihat di GitHub
                     </a>
@@ -903,7 +903,7 @@
             </div>
             <div class="project-content">
                 <h3>Kubernetes IaC &amp; GitOps Lab</h3>
-                <p>Cluster Kubernetes multi-node (kind) beserta platformnya dibangun sepenuhnya dengan OpenTofu dan bisa dibangun ulang identik dalam kurang dari 4 menit. Deployment memakai GitOps dengan Argo CD dan pola app of apps: lingkungan dev dan prod dari overlay Kustomize, versi baru dipromosikan lewat pull request dengan tag image yang sama (tanpa build ulang), CI membuka PR rilis ke dev secara otomatis, rollback dengan git revert, dan perubahan manual dikembalikan otomatis. Deployment dibatasi AppProject dan CODEOWNERS. Teknologi: OpenTofu, Kubernetes, Argo CD, Kustomize, GitHub Actions.</p>
+                <p>Cluster Kubernetes multi-node (kind) beserta platformnya dibangun sepenuhnya dengan OpenTofu dan bisa dibangun ulang identik dalam kurang dari 4 menit. Deployment memakai GitOps dengan Argo CD dan pola app of apps: lingkungan dev dan prod dari overlay Kustomize, versi baru dipromosikan lewat pull request dengan tag image yang sama (tanpa build ulang), CI membuka PR rilis ke dev secara otomatis, rollback dengan git revert, dan perubahan manual dikembalikan otomatis. Deployment dibatasi AppProject dan CODEOWNERS. Resource aplikasi dan penyimpanan persisten (PersistentVolume dan PVC) juga dikelola OpenTofu, dengan bukti data tetap ada saat Pod diganti. Teknologi: OpenTofu, Kubernetes, Argo CD, Kustomize, GitHub Actions.</p>
                 <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
                     <a href="https://github.com/Bram-02/kubernetes-iac-gitops-lab" target="_blank" class="btn-pdf">
                         <i class="fab fa-github"></i> Lihat di GitHub
@@ -972,6 +972,8 @@
             <!-- Keamanan -->
             <div class="stack-item"><i class="fas fa-shield-alt" style="color:#557c94"></i><p>Kali</p></div>
             <div class="stack-item"><i class="fas fa-bug" style="color:#1904da"></i><p>Trivy</p></div>
+            <div class="stack-item"><i class="fas fa-signature" style="color:#2e7d32"></i><p>Cosign</p></div>
+            <div class="stack-item"><i class="fas fa-robot" style="color:#0366d6"></i><p>Dependabot</p></div>
             <div class="stack-item"><i class="fas fa-lock" style="color:#9c27b0"></i><p>Security</p></div>
             
         </div>
